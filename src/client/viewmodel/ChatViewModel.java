@@ -7,11 +7,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import util.NamedPropertyChangeSubject;
 
+import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 
-public class ChatViewModel implements NamedPropertyChangeSubject
+public class ChatViewModel implements PropertyChangeListener
 {
     private Model model;
     private ObservableList<String> usersList;
@@ -19,7 +20,6 @@ public class ChatViewModel implements NamedPropertyChangeSubject
     private StringProperty textFieldInput;
     private PropertyChangeSupport property;
     private String currentUser;
-    private String previousUser;
 
     
     public ChatViewModel(Model model) {
@@ -27,7 +27,6 @@ public class ChatViewModel implements NamedPropertyChangeSubject
         this.chatList = FXCollections.observableArrayList();
         this.usersList = FXCollections.observableArrayList();
         this.textFieldInput = new SimpleStringProperty();
-        this.property = new PropertyChangeSupport(this);
     }
     public void reset(){
 
@@ -50,14 +49,8 @@ public class ChatViewModel implements NamedPropertyChangeSubject
     }
 
     @Override
-    public void addListener(String propertyName, PropertyChangeListener listener)
+    public void propertyChange(PropertyChangeEvent evt)
     {
-        property.addPropertyChangeListener(propertyName, listener);
-    }
 
-    @Override
-    public void removeListener(String propertyName, PropertyChangeListener listener)
-    {
-        property.removePropertyChangeListener(propertyName, listener);
     }
 }

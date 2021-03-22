@@ -1,8 +1,13 @@
 package client.model;
 
+import client.mediator.ChatClient;
+
 public class ModelManager implements Model {
 
-    
+
+    private ChatClient chatClient;
+
+
     @Override
     public void login(String username)
     {
