@@ -1,6 +1,9 @@
 package client.model;
 
-public interface Model {
+import util.NamedPropertyChangeSubject;
+
+public interface Model extends NamedPropertyChangeSubject
+{
     void login(String username);
     void getOnlineUsersList();
     void sendPublicMessage(String message);
