@@ -20,10 +20,11 @@ public class ChatClient implements Model
   private PrintWriter out;
   private Gson gson;
   private Message receivedMessage;
+  private String user;
   private boolean waiting;
   private PropertyChangeSupport property;
 
-  public ChatClient(Model model, String host, int port) throws IOException
+  public ChatClient(Model model, String host, int port, String user) throws IOException
   {
     this.model = model;
     socket = new Socket(host, port);
@@ -32,6 +33,7 @@ public class ChatClient implements Model
     gson = new Gson();
     waiting = false;
     receivedMessage = null;
+    this.user = user;
     property = new PropertyChangeSupport(this);
     ClientReceiver clientReceiver = new ClientReceiver(this, in);
     Thread t = new Thread(clientReceiver);
