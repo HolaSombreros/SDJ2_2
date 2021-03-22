@@ -17,9 +17,7 @@ public abstract class ViewController {
         init();
     }
     
-    public void reset() {
-        // TODO: Implement method.
-    }
+    public abstract void reset();
     
     public Region getRoot() {
         return _root;

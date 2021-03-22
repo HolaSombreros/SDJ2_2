@@ -13,4 +13,9 @@ public class LoginViewController extends ViewController {
     protected void init() {
         _viewModel = getViewModelFactory().getLoginViewModel();
     }
+    
+    @Override
+    public void reset() {
+    
+    }
 }
