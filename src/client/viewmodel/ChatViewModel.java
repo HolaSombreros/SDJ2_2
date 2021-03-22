@@ -18,6 +18,8 @@ public class ChatViewModel implements NamedPropertyChangeSubject
     private ObservableList<String> chatList;
     private StringProperty textFieldInput;
     private PropertyChangeSupport property;
+    private String currentUser;
+    private String previousUser;
 
     
     public ChatViewModel(Model model) {
@@ -40,6 +42,7 @@ public class ChatViewModel implements NamedPropertyChangeSubject
         return textFieldInput;
     }
     public void disconnect(){
+
 
     }
     public void sendMessage(){
