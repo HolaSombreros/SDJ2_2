@@ -1,21 +1,19 @@
 package server.model;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Message
 {
   private String text;
   private String ipAddress;
-  private String date;
-  private String time;
+  private LocalDateTime time;
 
-  public Message(String text, String ipAddress, String date, String time)
+  public Message(String text, String ipAddress)
   {
     this.text = text;
     this.ipAddress = ipAddress;
-    this.date = getDate();
-    this.time = getTime();
+    this.time = LocalDateTime.now();
   }
 
   public String getText()
@@ -28,20 +26,20 @@ public class Message
     return ipAddress;
   }
 
-  public String getDate()
+  public LocalDateTime getDateTime()
   {
-    LocalDate localDate = LocalDate.now();
-    return localDate.toString();
+    return time;
   }
 
-  public String getTime()
+  public String getDateTimeAsString()
   {
-    LocalTime localTime = LocalTime.now();
-    return localTime.toString();
+    DateTimeFormatter dtf;
+    dtf = DateTimeFormatter.ofPattern("dd/MM/yyy HH:mm:ss");
+    return time.format(dtf);
   }
 
   public String toString()
   {
-    return text + " " + ipAddress + " " + date + " " + time;
+    return getDateTimeAsString() + " " + ipAddress + " " + text;
   }
 }
