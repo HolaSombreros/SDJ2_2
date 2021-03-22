@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
 public class LoginViewController extends ViewController {
-    private LoginViewModel _viewModel;
+    private LoginViewModel viewModel;
     
     @FXML
     private TextField usernameInput;
@@ -16,13 +16,13 @@ public class LoginViewController extends ViewController {
     
     @Override
     protected void init() {
-        _viewModel = getViewModelFactory().getLoginViewModel();
-        usernameInput.textProperty().bindBidirectional(_viewModel.getUsernameProperty());
+        viewModel = getViewModelFactory().getLoginViewModel();
+        usernameInput.textProperty().bindBidirectional(viewModel.getUsernameProperty());
     }
     
     @Override
     public void reset() {
-        _viewModel.reset();
+        viewModel.reset();
     }
     
     @FXML

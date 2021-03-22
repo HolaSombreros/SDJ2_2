@@ -4,30 +4,30 @@ import client.viewmodel.ViewModelFactory;
 import javafx.scene.layout.Region;
 
 public abstract class ViewController {
-    private Region _root;
-    private ViewHandler _viewHandler;
-    private ViewModelFactory _viewModelFactory;
+    private Region root;
+    private ViewHandler viewHandler;
+    private ViewModelFactory viewModelFactory;
     
     protected abstract void init();
     
     public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory, Region root) {
-        _viewHandler = viewHandler;
-        _viewModelFactory = viewModelFactory;
-        _root = root;
+        this.viewHandler = viewHandler;
+        this.viewModelFactory = viewModelFactory;
+        this.root = root;
         init();
     }
     
     public abstract void reset();
     
     public Region getRoot() {
-        return _root;
+        return root;
     }
     
     public ViewModelFactory getViewModelFactory() {
-        return _viewModelFactory;
+        return viewModelFactory;
     }
     
     public ViewHandler getViewHandler() {
-        return _viewHandler;
+        return viewHandler;
     }
 }
