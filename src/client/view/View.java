@@ -1,8 +1,7 @@
 package client.view;
 
 public enum View {
-    LOGINVIEW("PasswordGeneratorView.fxml"),
-    CHATVIEW("PasswordLogView.fxml");
+    LOGINVIEW("LoginView.fxml");
     
     private String fxmlFile;
     

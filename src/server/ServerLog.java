@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ServerLog {
-    private static Map<String, ServerLog> instances = new HashMap<>();
+    private static Map<String, ServerLog> _instances = new HashMap<>();
     private ArrayList<String> _log;
     private String _fileName;
     
@@ -15,13 +15,13 @@ public class ServerLog {
     }
     
     public static ServerLog getInstance(String fileName) {
-        ServerLog instance = instances.get(fileName);
+        ServerLog instance = _instances.get(fileName);
         if (instance == null) {
-            synchronized (instances) {
-                instance = instances.get(fileName);
+            synchronized (_instances) {
+                instance = _instances.get(fileName);
                 if (instance == null) {
                     instance = new ServerLog(fileName);
-                    instances.put(fileName, instance);
+                    _instances.put(fileName, instance);
                 }
             }
         }
