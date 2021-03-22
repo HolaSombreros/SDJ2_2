@@ -1,7 +1,6 @@
 package client.view;
 
 import client.viewmodel.ChatViewModel;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -16,19 +15,23 @@ public class ChatViewController extends ViewController {
     @FXML private ListView<String> usersRoom;
     private ChatViewModel chatViewModel;
 
-
-
-    @FXML private void sendButton(ActionEvent event){
+    public ChatViewController(){
 
     }
 
-    @FXML private void disconnect(ActionEvent event){
+    @FXML private void sendButton(){
+        chatViewModel.sendMessage();
+    }
 
+    @FXML private void disconnect(){
+        chatViewModel.disconnect();
     }
     @Override
     protected void init() {
         chatViewModel = getViewModelFactory().getChatViewModel();
         clientMessageInput.textProperty().bindBidirectional(chatViewModel.getTextFieldInput());
+        chatRoom.setItems(chatViewModel.getChatList());
+        usersRoom.setItems(chatViewModel.getUsersList());
 
     }
     

@@ -5,8 +5,6 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import util.NamedPropertyChangeSubject;
-
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -41,11 +39,11 @@ public class ChatViewModel implements PropertyChangeListener
         return textFieldInput;
     }
     public void disconnect(){
-
+        model.disconnect();
 
     }
     public void sendMessage(){
-
+        model.sendPublicMessage(currentUser + ": " + textFieldInput.get());
     }
 
     @Override
