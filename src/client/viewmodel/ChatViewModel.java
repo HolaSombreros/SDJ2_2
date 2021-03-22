@@ -40,10 +40,15 @@ public class ChatViewModel implements PropertyChangeListener
     }
     public void disconnect(){
         model.disconnect();
+        System.exit(0);
 
     }
     public void sendMessage(){
-        model.sendPublicMessage(currentUser + ": " + textFieldInput.get());
+        if(!textFieldInput.get().isEmpty())
+        {
+            model.sendPublicMessage(currentUser + ": " + textFieldInput.get());
+        }
+        textFieldInput.set("");
     }
 
     @Override

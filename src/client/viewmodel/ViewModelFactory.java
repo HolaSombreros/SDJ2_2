@@ -3,19 +3,19 @@ package client.viewmodel;
 import client.model.Model;
 
 public class ViewModelFactory {
-    private LoginViewModel _loginViewModel;
-    private ChatViewModel _chatViewModel;
+    private LoginViewModel loginViewModel;
+    private ChatViewModel chatViewModel;
     
     public ViewModelFactory(Model model) {
-        _loginViewModel = new LoginViewModel(model);
-        _chatViewModel = new ChatViewModel(model);
+        loginViewModel = new LoginViewModel(model);
+        chatViewModel = new ChatViewModel(model);
     }
     
     public LoginViewModel getLoginViewModel() {
-        return _loginViewModel;
+        return loginViewModel;
     }
     
     public ChatViewModel getChatViewModel() {
-        return _chatViewModel;
+        return chatViewModel;
     }
 }
