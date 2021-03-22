@@ -8,20 +8,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class ViewCreator {
-    private Map<View, ViewController> _viewControllerMap;
+    private Map<View, ViewController> viewControllerMap;
     
     public ViewCreator() {
-        _viewControllerMap = new HashMap<>();
+        viewControllerMap = new HashMap<>();
     }
     
     public ViewController getViewController(View view) {
-        ViewController controller = _viewControllerMap.get(view);
+        ViewController controller = viewControllerMap.get(view);
         if (controller == null) {
             controller = loadFromFXML(view.getFxmlFile());
-            _viewControllerMap.put(view, controller);
+            viewControllerMap.put(view, controller);
         }
         else {
-            _viewControllerMap.get(view).reset();
+            viewControllerMap.get(view).reset();
         }
         return controller;
     }
