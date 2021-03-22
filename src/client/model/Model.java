@@ -9,5 +9,4 @@ public interface Model extends NamedPropertyChangeSubject
     void sendPublicMessage(String message);
     void getUsername();
     void disconnect();
-
 }

@@ -59,7 +59,27 @@ public class ChatClient implements Model
     }
   }
 
-  public void disconnect()
+  @Override public void login(String username)
+  {
+
+  }
+
+  @Override public void getOnlineUsersList()
+  {
+
+  }
+
+  @Override public void sendPublicMessage(String message)
+  {
+
+  }
+
+  @Override public void getUsername()
+  {
+
+  }
+
+  @Override public void disconnect()
   {
     try
     {
