@@ -2,11 +2,12 @@ package client.model;
 
 import client.mediator.ChatClient;
 
+import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.IOException;
 
-public class ModelManager implements Model {
+public class ModelManager implements Model, PropertyChangeListener {
     private ChatClient chatClient;
     private PropertyChangeSupport property;
     
@@ -18,7 +19,8 @@ public class ModelManager implements Model {
     @Override
     public void login(String username) {
         try {
-            chatClient = new ChatClient(this, "localhost", 1234);
+            chatClient = new ChatClient(this, "localhost", 1234, username);
+            chatClient.addListener(null, this);
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -64,5 +66,10 @@ public class ModelManager implements Model {
         else {
             property.removePropertyChangeListener(propertyName, listener);
         }
+    }
+    
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+    
     }
 }

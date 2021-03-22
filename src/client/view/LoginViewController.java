@@ -2,13 +2,14 @@ package client.view;
 
 import client.viewmodel.LoginViewModel;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class LoginViewController extends ViewController {
     private LoginViewModel viewModel;
     
-    @FXML
-    private TextField usernameInput;
+    @FXML private TextField usernameInput;
+    @FXML private Label errorLabel;
     
     public LoginViewController() {
     
@@ -18,6 +19,7 @@ public class LoginViewController extends ViewController {
     protected void init() {
         viewModel = getViewModelFactory().getLoginViewModel();
         usernameInput.textProperty().bindBidirectional(viewModel.getUsernameProperty());
+        errorLabel.textProperty().bind(viewModel.getErrorProperty());
     }
     
     @Override
@@ -26,7 +28,9 @@ public class LoginViewController extends ViewController {
     }
     
     @FXML
-    private void connect() {
-        getViewHandler().openView(View.CHATVIEW);
+    private void login() {
+        if (viewModel.login()) {
+            getViewHandler().openView(View.CHATVIEW);
+        }
     }
 }
