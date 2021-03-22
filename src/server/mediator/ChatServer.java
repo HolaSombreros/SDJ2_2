@@ -33,6 +33,7 @@ public class ChatServer implements Runnable
       {
         Socket socket = welcomeSocket.accept();
         ClientHandler clientHandler = new ClientHandler(socket,model);
+        System.out.println(socket.getInetAddress().getHostAddress() + " connected!");
         Thread t = new Thread(clientHandler);
         t.start();
       }

@@ -5,19 +5,19 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class LoginViewModel {
-    private Model _model;
-    private StringProperty _username;
+    private Model model;
+    private StringProperty username;
     
     public LoginViewModel(Model model) {
-        _model = model;
-        _username = new SimpleStringProperty();
+        this.model = model;
+        username = new SimpleStringProperty();
     }
     
     public StringProperty getUsernameProperty() {
-        return _username;
+        return username;
     }
     
     public void reset() {
-        _username.set("");
+        username.set("");
     }
 }
