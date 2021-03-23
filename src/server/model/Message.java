@@ -6,13 +6,13 @@ import java.time.format.DateTimeFormatter;
 public class Message
 {
   private String text;
-  private String ipAddress;
+  private String username;
   private LocalDateTime time;
 
   public Message(String text, String ipAddress)
   {
     this.text = text;
-    this.ipAddress = ipAddress;
+    this.username = ipAddress;
     this.time = LocalDateTime.now();
   }
 
@@ -23,7 +23,7 @@ public class Message
 
   public String getIpAddress()
   {
-    return ipAddress;
+    return username;
   }
 
   public LocalDateTime getDateTime()
@@ -40,6 +40,6 @@ public class Message
 
   public String toString()
   {
-    return getDateTimeAsString() + " " + ipAddress + " " + text;
+    return getDateTimeAsString() + " " + username + " " + text;
   }
 }
