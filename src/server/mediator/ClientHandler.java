@@ -60,13 +60,19 @@ public class ClientHandler implements Runnable, PropertyChangeListener
 
   @Override public void propertyChange(PropertyChangeEvent evt)
   {
+    Message message;
+    String reply;
     switch (evt.getPropertyName())
     {
       case "login":
-        Message message = new Message(evt.getPropertyName(), (String) evt.getOldValue(), (String) evt.getNewValue());
-        String reply = gson.toJson(message);
+        message = new Message(evt.getPropertyName(), (String) evt.getOldValue(), (String) evt.getNewValue());
+        reply = gson.toJson(message);
         out.println(reply);
         break;
+      case "message":
+        message = (Message) evt.getNewValue();
+        reply = gson.toJson(message);
+        out.println(reply);
     }
   }
 }
