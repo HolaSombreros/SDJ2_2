@@ -43,7 +43,9 @@ public class ClientHandler implements Runnable, PropertyChangeListener
 
         switch (message.getType())
         {
-          case "login" -> serverModel.login(message.getUsername());
+          case "login":
+            serverModel.login(message.getUsername());
+            break;
         }
       }
       catch (IOException e)
