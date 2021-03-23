@@ -9,7 +9,7 @@
 
 <VBox alignment="CENTER" prefHeight="300.0" prefWidth="500.0" spacing="10.0" userData="Login" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.LoginViewController">
    <children>
-      <TextField fx:id="usernameInput" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="300.0" promptText="Username">
+      <TextField fx:id="usernameInput" onAction="#onEnter" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="300.0" promptText="Username">
          <font>
             <Font size="14.0" />
          </font>

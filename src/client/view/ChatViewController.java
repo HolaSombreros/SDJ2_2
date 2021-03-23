@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
+import java.awt.event.ActionEvent;
 import java.io.File;
 
 
@@ -20,6 +21,13 @@ public class ChatViewController extends ViewController {
 
     public ChatViewController(){
 
+    }
+    public void onEnter(javafx.event.ActionEvent event)
+    {
+        if(event.getSource() == clientMessageInput){
+            clientMessageInput.requestFocus();
+           sendButton();
+        }
     }
 
     @FXML private void sendButton(){
