@@ -63,7 +63,7 @@ public class ChatClient implements Model
 
   @Override public void login(String username)
   {
-
+    out.println(username);
   }
 
   @Override public void getOnlineUsersList()

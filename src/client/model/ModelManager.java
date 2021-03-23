@@ -21,6 +21,8 @@ public class ModelManager implements Model, PropertyChangeListener {
         try {
             chatClient = new ChatClient(this, "localhost", 1234, username);
             chatClient.addListener(null, this);
+            login(username);
+
         }
         catch (IOException e) {
             e.printStackTrace();
