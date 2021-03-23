@@ -37,7 +37,8 @@ public class ClientHandler implements Runnable, PropertyChangeListener
     {
       try
       {
-        in.readLine();
+        String message = in.readLine();
+        serverModel.login(message);
       }
       catch (IOException e)
       {
@@ -50,8 +51,8 @@ public class ClientHandler implements Runnable, PropertyChangeListener
   {
     switch (evt.getPropertyName()) {
       case "login":
-        out.println(socket.getInetAddress().getHostAddress() + " connected to the server!");
-        System.out.println(socket.getInetAddress().getHostAddress() + " connected to the server!");
+        out.println(evt.getNewValue());
+        System.out.println(evt.getNewValue());
         break;
     }
   }

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class ServerModelManager implements ServerModel
 {
   private PropertyChangeSupport property;
-  private ArrayList<ClientHandler> clients;
+  private ArrayList<String> clients;
 
   public ServerModelManager()
   {
@@ -28,9 +28,9 @@ public class ServerModelManager implements ServerModel
   }
   
   @Override
-  public void login() {
-    property.firePropertyChange("login", null, "Some User");
-//    clients.add();
+  public void login(String username) {
+    clients.add(username);
+    property.firePropertyChange("login", null, username + " connected to the server!");
   }
   
   @Override public void addListener(String propertyName, PropertyChangeListener listener)

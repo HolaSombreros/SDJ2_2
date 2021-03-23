@@ -6,5 +6,5 @@ public interface ServerModel extends NamedPropertyChangeSubject
 {
   String getOnlineUsers();
   String getChatLog();
-  void login();
+  void login(String username);
 }
