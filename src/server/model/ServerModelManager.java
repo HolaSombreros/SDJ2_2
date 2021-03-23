@@ -34,7 +34,7 @@ public class ServerModelManager implements ServerModel
     else
     {
       clients.add(username);
-      property.firePropertyChange("login", username," connected to the server!");
+      property.firePropertyChange("login", username,"connected to the server!");
     }
   }
 
