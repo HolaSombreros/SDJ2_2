@@ -21,7 +21,7 @@ public class ModelManager implements Model, PropertyChangeListener {
     @Override
     public void login(String username) {
         try {
-            chatClient = new ChatClient(this, "localhost", 1234, username);
+            chatClient = new ChatClient(this, "localhost", 1234);
             chatClient.addListener(null, this);
             chatClient.login(username);
         }
@@ -73,15 +73,17 @@ public class ModelManager implements Model, PropertyChangeListener {
     
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        Message message = (Message) evt.getNewValue();
+        Message message;
         switch (evt.getPropertyName()) {
             case "login":
+            case "logout":
             case "message":
-                property.firePropertyChange(evt.getPropertyName(), message.getUsername(), message.getText());
+                message = (Message) evt.getNewValue();
+                property.firePropertyChange(evt.getPropertyName(), null, message);
                 break;
             case "users":
-                break;
-            case "logout":
+//                message = (Message) evt.getNewValue();
+//                property.firePropertyChange();
                 break;
         }
     }
