@@ -16,7 +16,6 @@ public class ChatViewModel implements PropertyChangeListener
     private ObservableList<String> usersList;
     private ObservableList<String> chatList;
     private StringProperty textFieldInput;
-    private PropertyChangeSupport property;
 
     
     public ChatViewModel(Model model) {
@@ -57,7 +56,7 @@ public class ChatViewModel implements PropertyChangeListener
         switch (evt.getPropertyName()) {
             case "login":
                 usersList.add((String)evt.getNewValue());
-                chatList.add((String)evt.getNewValue());
+                chatList.add((String)evt.getOldValue());
                 break;
             case "message":
                 chatList.add((String)evt.getNewValue());
