@@ -33,8 +33,6 @@ public class ServerModelManager implements ServerModel
     Message message;
     if (clients.contains(username)) {
       property.firePropertyChange("login", null, "The username already exists");
-      message = new Message("login",username,"The username already exists");
-      ServerLog.getInstance().addLog(message);
     }
     else
     {
