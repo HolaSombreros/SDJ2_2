@@ -25,7 +25,7 @@ public class ChatClient implements Model
   private boolean waiting;
   private PropertyChangeSupport property;
 
-  public ChatClient(Model model, String host, int port, String user) throws IOException
+  public ChatClient(Model model, String host, int port) throws IOException
   {
     this.model = model;
     socket = new Socket(host, port);
