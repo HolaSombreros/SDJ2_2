@@ -73,6 +73,7 @@ public class ClientHandler implements Runnable, PropertyChangeListener
         message = (Message) evt.getNewValue();
         reply = gson.toJson(message);
         out.println(reply);
+        break;
     }
   }
 }
