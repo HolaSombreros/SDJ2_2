@@ -38,6 +38,11 @@ public class ServerModelManager implements ServerModel
     }
   }
 
+  @Override
+  public void sendMessage(Message message) {
+
+  }
+
   @Override public void disconnect(String username)
   {
     clients.remove(username);

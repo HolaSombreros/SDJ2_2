@@ -10,4 +10,5 @@ public interface ServerModel extends NamedPropertyChangeSubject
   String getChatLog();
   void login(String username);
   void disconnect(String username);
+  void sendMessage(Message message);
 }
