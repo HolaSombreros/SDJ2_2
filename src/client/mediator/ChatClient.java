@@ -43,8 +43,6 @@ public class ChatClient implements Model
 
   public synchronized void received(String received)
   {
-    // TODO - modify this to make it proper.
-    // Maybe add another class so we can detect different types of messages?
     Message receivedMessage = gson.fromJson(received,Message.class);
     switch(receivedMessage.getType()){
       case "login":
