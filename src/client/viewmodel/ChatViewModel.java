@@ -25,6 +25,7 @@ public class ChatViewModel implements PropertyChangeListener
         this.chatList = FXCollections.observableArrayList();
         this.usersList = FXCollections.observableArrayList();
         this.textFieldInput = new SimpleStringProperty();
+        model.addListener(null,this);
     }
     public void reset(){
 
@@ -57,13 +58,11 @@ public class ChatViewModel implements PropertyChangeListener
     {
         switch (evt.getPropertyName()) {
             case "login":
-                // print the newvalue to chat
                 usersList.add((String)evt.getNewValue());
                 chatList.add((String)evt.getNewValue());
                 break;
             case "message":
                 chatList.add((String)evt.getNewValue());
-                // print the newvalue to chat
                 break;
         }
     }
