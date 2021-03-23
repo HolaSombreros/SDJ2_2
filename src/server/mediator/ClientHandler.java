@@ -46,6 +46,9 @@ public class ClientHandler implements Runnable, PropertyChangeListener
           case "login":
             serverModel.login(message.getUsername());
             break;
+          case "message":
+            serverModel.sendMessage(message);
+            break;
         }
       }
       catch (IOException e)
