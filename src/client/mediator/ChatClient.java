@@ -40,7 +40,7 @@ public class ChatClient implements Model
     t.start();
   }
 
-  public synchronized void received(Message received)
+  public synchronized void received(String received)
   {
 
   }
