@@ -5,23 +5,29 @@ import java.time.format.DateTimeFormatter;
 
 public class Message
 {
-  private String text;
+  private String type;
   private String username;
+  private String text;
   private LocalDateTime time;
 
-  public Message(String text, String ipAddress)
+  public Message(String type, String username, String text)
   {
+    this.type = type;
+    this.username = username;
     this.text = text;
-    this.username = ipAddress;
     this.time = LocalDateTime.now();
   }
 
+  public String getType()
+  {
+    return type;
+  }
   public String getText()
   {
     return text;
   }
 
-  public String getIpAddress()
+  public String getUsername()
   {
     return username;
   }
