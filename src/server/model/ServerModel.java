@@ -2,9 +2,11 @@ package server.model;
 
 import util.NamedPropertyChangeSubject;
 
+import java.util.ArrayList;
+
 public interface ServerModel extends NamedPropertyChangeSubject
 {
-  String getOnlineUsers();
+  ArrayList<String> getOnlineUsers();
   String getChatLog();
   void login(String username);
 }
