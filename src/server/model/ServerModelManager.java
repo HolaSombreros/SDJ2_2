@@ -32,7 +32,7 @@ public class ServerModelManager implements ServerModel
   {
     Message message;
     if (clients.contains(username)) {
-      property.firePropertyChange("error", null, "The username already exists");
+      property.firePropertyChange("error", username, "The username already exists");
     }
     else
     {

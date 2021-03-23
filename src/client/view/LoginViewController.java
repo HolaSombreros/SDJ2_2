@@ -1,11 +1,10 @@
 package client.view;
 
 import client.viewmodel.LoginViewModel;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-
-import java.awt.event.ActionEvent;
 
 public class LoginViewController extends ViewController {
     private LoginViewModel viewModel;
@@ -16,7 +15,7 @@ public class LoginViewController extends ViewController {
     public LoginViewController() {
     
     }
-
+    
     @Override
     protected void init() {
         viewModel = getViewModelFactory().getLoginViewModel();
@@ -35,11 +34,10 @@ public class LoginViewController extends ViewController {
             getViewHandler().openView(View.CHATVIEW);
         }
     }
-
-    public void onEnter(javafx.event.ActionEvent event)
-    {
-        if(event.getSource() == usernameInput){
-            usernameInput.requestFocus();
+    
+    @FXML
+    private void onEnter(ActionEvent e) {
+        if (e.getSource() == usernameInput) {
             login();
         }
     }

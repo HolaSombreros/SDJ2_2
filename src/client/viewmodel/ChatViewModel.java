@@ -1,6 +1,7 @@
 package client.viewmodel;
 
 import client.model.Model;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -55,15 +56,17 @@ public class ChatViewModel implements PropertyChangeListener
     @Override
     public void propertyChange(PropertyChangeEvent evt)
     {
-        Message message = (Message)evt.getNewValue();
-        switch (evt.getPropertyName()) {
-            case "login":
-                usersList.add(message.getUsername());
-                chatList.add(message.getUsername() + " " + message.getText());
-                break;
-            case "message":
-                chatList.add(message.getUsername() + ": " + message.getText());
-                break;
-        }
+        Platform.runLater(() -> {
+            Message message = (Message)evt.getNewValue();
+            switch (evt.getPropertyName()) {
+                case "login":
+                    usersList.add(message.getUsername());
+                    chatList.add(message.getUsername() + " " + message.getText());
+                    break;
+                case "message":
+                    chatList.add(message.getUsername() + ": " + message.getText());
+                    break;
+            }
+        });
     }
 }

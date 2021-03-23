@@ -32,7 +32,7 @@ public class ChatViewController extends ViewController {
 
     @FXML private void sendButton(){
         chatViewModel.sendMessage();
-        sound();
+//        sound();
     }
 
     @FXML private void disconnect(){

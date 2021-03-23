@@ -46,15 +46,14 @@ public class ChatClient implements Model
     Message receivedMessage = gson.fromJson(received,Message.class);
     switch(receivedMessage.getType()){
       case "login":
-        if(receivedMessage.getText().equals("The username already exists"))
-            throw new IllegalArgumentException(receivedMessage.getText());
         user = receivedMessage.getUsername();
         property.firePropertyChange("login", null, receivedMessage);
-        System.out.println("Sent message to modelmanager");
         break;
       case "message":
         property.firePropertyChange("message", null, receivedMessage);
         break;
+//      case "error":
+//        notify();
     }
 
   }
