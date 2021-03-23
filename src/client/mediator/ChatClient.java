@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class ChatClient implements Model
 {
@@ -42,7 +43,14 @@ public class ChatClient implements Model
 
   public synchronized void received(String received)
   {
-
+    // TODO - modify this to make it proper.
+    // Maybe add another class so we can detect different types of messages?
+    if (received.contains("connected")) {
+      property.firePropertyChange("connected", null, received);
+    }
+    else { // a message from a user
+      property.firePropertyChange("message", null, received);
+    }
   }
 
   private synchronized void waitingForReply()
@@ -66,9 +74,10 @@ public class ChatClient implements Model
     out.println(username);
   }
 
-  @Override public void getOnlineUsersList()
+  @Override public ArrayList<String> getOnlineUsersList()
   {
-
+    // TODO - implement
+    return null;
   }
 
   @Override public void sendPublicMessage(String message)
@@ -76,9 +85,10 @@ public class ChatClient implements Model
 
   }
 
-  @Override public void getUsername()
+  @Override public String getUsername()
   {
-
+    // TODO - implement
+    return null;
   }
 
   @Override public void disconnect()

@@ -55,6 +55,13 @@ public class ChatViewModel implements PropertyChangeListener
     @Override
     public void propertyChange(PropertyChangeEvent evt)
     {
-
+        switch (evt.getPropertyName()) {
+            case "login":
+                // print the newvalue to chat
+                break;
+            case "message":
+                // print the newvalue to chat
+                break;
+        }
     }
 }

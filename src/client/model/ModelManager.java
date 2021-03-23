@@ -73,6 +73,13 @@ public class ModelManager implements Model, PropertyChangeListener {
     
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        property.firePropertyChange(evt);
+        switch (evt.getPropertyName()) {
+            case "login":
+                property.firePropertyChange(evt.getPropertyName(), null, evt.getNewValue());
+                break;
+            case "message":
+                property.firePropertyChange(evt.getPropertyName(), null, evt.getNewValue());
+                break;
+        }
     }
 }
