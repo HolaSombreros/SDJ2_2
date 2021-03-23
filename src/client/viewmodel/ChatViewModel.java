@@ -58,8 +58,11 @@ public class ChatViewModel implements PropertyChangeListener
         switch (evt.getPropertyName()) {
             case "login":
                 // print the newvalue to chat
+                usersList.add((String)evt.getNewValue());
+                chatList.add((String)evt.getNewValue());
                 break;
             case "message":
+                chatList.add((String)evt.getNewValue());
                 // print the newvalue to chat
                 break;
         }
