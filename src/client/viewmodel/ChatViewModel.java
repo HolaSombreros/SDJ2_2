@@ -46,7 +46,8 @@ public class ChatViewModel implements PropertyChangeListener
     public void sendMessage(){
         if(!textFieldInput.get().isEmpty())
         {
-            model.sendPublicMessage(currentUser + ": " + textFieldInput.get());
+            model.sendPublicMessage(textFieldInput.get());
+            chatList.add(currentUser + ": " + textFieldInput.get());
         }
         textFieldInput.set("");
     }

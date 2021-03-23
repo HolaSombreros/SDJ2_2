@@ -6,6 +6,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ModelManager implements Model, PropertyChangeListener {
     private ChatClient chatClient;
@@ -30,8 +31,8 @@ public class ModelManager implements Model, PropertyChangeListener {
     }
     
     @Override
-    public void getOnlineUsersList() {
-        chatClient.getOnlineUsersList();
+    public ArrayList<String> getOnlineUsersList() {
+       return chatClient.getOnlineUsersList();
     }
     
     @Override
@@ -40,8 +41,8 @@ public class ModelManager implements Model, PropertyChangeListener {
     }
     
     @Override
-    public void getUsername() {
-        chatClient.getUsername();
+    public String getUsername() {
+       return chatClient.getUsername();
     }
     
     @Override
