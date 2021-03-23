@@ -2,29 +2,31 @@ package server;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import server.model.Message;
 
 public class ServerLog {
-    private static Map<String, ServerLog> instances = new HashMap<>();
+    private static Map<LocalDate, ServerLog> instances = new HashMap<>();
     private ArrayList<Message> log;
-    private String fileName;
+    private LocalDate date;
     
-    private ServerLog(String fileName) {
+    private ServerLog(LocalDate date) {
         this.log = new ArrayList<>();
-        this.fileName = fileName;
+        this.date = date;
     }
     
-    public static ServerLog getInstance(String fileName) {
-        ServerLog instance = instances.get(fileName);
+    public static ServerLog getInstance() {
+        LocalDate today = LocalDate.now();
+        ServerLog instance = instances.get(today);
         if (instance == null) {
             synchronized (instances) {
-                instance = instances.get(fileName);
+                instance = instances.get(today);
                 if (instance == null) {
-                    instance = new ServerLog(fileName);
-                    instances.put(fileName, instance);
+                    instance = new ServerLog(today);
+                    instances.put(today, instance);
                 }
             }
         }
@@ -42,7 +44,7 @@ public class ServerLog {
         }
         BufferedWriter out = null;
          try {
-             out = new BufferedWriter(new FileWriter("Log-" + fileName + ".txt", true));
+             out = new BufferedWriter(new FileWriter("Log-" + date.toString() + ".txt", true));
              out.write(message.toString() + "\n");
          }
          catch (Exception e) {
