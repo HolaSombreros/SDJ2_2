@@ -17,7 +17,6 @@ public class ChatViewModel implements PropertyChangeListener
     private ObservableList<String> chatList;
     private StringProperty textFieldInput;
     private PropertyChangeSupport property;
-    private String currentUser;
 
     
     public ChatViewModel(Model model) {
@@ -28,7 +27,7 @@ public class ChatViewModel implements PropertyChangeListener
         model.addListener(null,this);
     }
     public void reset(){
-
+            textFieldInput.set(null);
     }
     public ObservableList<String> getUsersList(){
         return usersList;
@@ -48,7 +47,6 @@ public class ChatViewModel implements PropertyChangeListener
         if(!textFieldInput.get().isEmpty())
         {
             model.sendPublicMessage(textFieldInput.get());
-            chatList.add(currentUser + ": " + textFieldInput.get());
         }
         textFieldInput.set("");
     }
