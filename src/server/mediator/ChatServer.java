@@ -1,6 +1,6 @@
 package server.mediator;
 
-import server.model.Model;
+import server.model.ServerModel;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -11,11 +11,11 @@ public class ChatServer implements Runnable
   public static final  int PORT = 1234;
   private boolean running;
   private ServerSocket welcomeSocket;
-  private Model model;
+  private ServerModel serverModel;
 
-  public ChatServer(Model model) throws IOException
+  public ChatServer(ServerModel serverModel) throws IOException
   {
-    this.model = model;
+    this.serverModel = serverModel;
     running = true;
     welcomeSocket = new ServerSocket(PORT);
   }
@@ -32,8 +32,7 @@ public class ChatServer implements Runnable
       try
       {
         Socket socket = welcomeSocket.accept();
-        ClientHandler clientHandler = new ClientHandler(socket,model);
-        System.out.println(socket.getInetAddress().getHostAddress() + " connected!");
+        ClientHandler clientHandler = new ClientHandler(socket, serverModel);
         Thread t = new Thread(clientHandler);
         t.start();
       }

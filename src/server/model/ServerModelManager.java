@@ -1,15 +1,20 @@
 package server.model;
 
+import server.mediator.ClientHandler;
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.ArrayList;
 
-public class ModelManager implements Model
+public class ServerModelManager implements ServerModel
 {
   private PropertyChangeSupport property;
+  private ArrayList<ClientHandler> clients;
 
-  public ModelManager()
+  public ServerModelManager()
   {
     property = new PropertyChangeSupport(this);
+    clients = new ArrayList<>();
   }
 
   @Override public String getOnlineUsers()
@@ -21,7 +26,13 @@ public class ModelManager implements Model
   {
     return null;
   }
-
+  
+  @Override
+  public void login() {
+    property.firePropertyChange("login", null, "Some User");
+//    clients.add();
+  }
+  
   @Override public void addListener(String propertyName, PropertyChangeListener listener)
   {
     property.addPropertyChangeListener(propertyName,listener);

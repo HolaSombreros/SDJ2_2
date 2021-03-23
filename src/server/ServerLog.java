@@ -11,11 +11,9 @@ import server.model.Message;
 public class ServerLog {
     private static Map<LocalDate, ServerLog> instances = new HashMap<>();
     private ArrayList<Message> log;
-    private LocalDate date;
     
-    private ServerLog(LocalDate date) {
+    private ServerLog() {
         this.log = new ArrayList<>();
-        this.date = date;
     }
     
     public static ServerLog getInstance() {
@@ -25,7 +23,7 @@ public class ServerLog {
             synchronized (instances) {
                 instance = instances.get(today);
                 if (instance == null) {
-                    instance = new ServerLog(today);
+                    instance = new ServerLog();
                     instances.put(today, instance);
                 }
             }
@@ -33,7 +31,7 @@ public class ServerLog {
         return instance;
     }
     
-    public void addLog(Message message) {
+    public synchronized void addLog(Message message) {
         log.add(message);
         log(message);
     }
@@ -44,7 +42,7 @@ public class ServerLog {
         }
         BufferedWriter out = null;
          try {
-             out = new BufferedWriter(new FileWriter("Log-" + date.toString() + ".txt", true));
+             out = new BufferedWriter(new FileWriter("Log-" + LocalDate.now().toString() + ".txt", true));
              out.write(message.toString() + "\n");
          }
          catch (Exception e) {
