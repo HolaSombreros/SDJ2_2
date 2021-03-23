@@ -35,12 +35,21 @@ public class ServerModelManager implements ServerModel
   
   @Override public void addListener(String propertyName, PropertyChangeListener listener)
   {
-    property.addPropertyChangeListener(propertyName,listener);
+    if (propertyName == null) {
+      property.addPropertyChangeListener(listener);
+    }
+    else {
+      property.addPropertyChangeListener(propertyName, listener);
+    }
   }
 
   @Override public void removeListener(String propertyName, PropertyChangeListener listener)
   {
-    property.removePropertyChangeListener(propertyName, listener);
+    if (propertyName == null) {
+      property.removePropertyChangeListener(listener);
+    }
+    else {
+      property.removePropertyChangeListener(propertyName, listener);
+    }
   }
-
 }

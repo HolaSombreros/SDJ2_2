@@ -52,7 +52,6 @@ public class ClientHandler implements Runnable, PropertyChangeListener
     switch (evt.getPropertyName()) {
       case "login":
         out.println(evt.getNewValue());
-        System.out.println(evt.getNewValue());
         break;
     }
   }
