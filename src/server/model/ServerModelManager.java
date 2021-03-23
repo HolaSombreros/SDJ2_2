@@ -17,9 +17,9 @@ public class ServerModelManager implements ServerModel
     clients = new ArrayList<>();
   }
 
-  @Override public String getOnlineUsers()
+  @Override public ArrayList<String> getOnlineUsers()
   {
-    return null;
+    return clients;
   }
 
   @Override public String getChatLog()
@@ -36,6 +36,11 @@ public class ServerModelManager implements ServerModel
       clients.add(username);
       property.firePropertyChange("login", null, username + " connected to the server!");
     }
+  }
+
+  @Override public void disconnect(String username)
+  {
+    clients.remove(username);
   }
 
   @Override public void addListener(String propertyName, PropertyChangeListener listener)
