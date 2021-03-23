@@ -72,6 +72,6 @@ public class ModelManager implements Model, PropertyChangeListener {
     
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-    
+        property.firePropertyChange(evt);
     }
 }
