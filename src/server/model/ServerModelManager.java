@@ -1,5 +1,6 @@
 package server.model;
 
+import server.ServerLog;
 import server.mediator.ClientHandler;
 
 import java.beans.PropertyChangeListener;
@@ -29,23 +30,33 @@ public class ServerModelManager implements ServerModel
 
   @Override public void login(String username)
   {
-    if (clients.contains(username))
+    Message message;
+    if (clients.contains(username)) {
       property.firePropertyChange("login", null, "The username already exists");
+      message = new Message("login",username,"The username already exists");
+      ServerLog.getInstance().addLog(message);
+    }
     else
     {
       clients.add(username);
       property.firePropertyChange("login", username,"connected to the server!");
+      message = new Message("login",username,"connected to the server!");
+      ServerLog.getInstance().addLog(message);
     }
   }
 
   @Override
   public void sendMessage(Message message) {
-
+    property.firePropertyChange("message",null,message);
+    ServerLog.getInstance().addLog(message);
   }
 
   @Override public void disconnect(String username)
   {
     clients.remove(username);
+    property.firePropertyChange("disconnect",username,"disconnected from the server");
+    Message message = new Message("disconnect",username,"disconnected from the server");
+    ServerLog.getInstance().addLog(message);
   }
 
   @Override public void addListener(String propertyName, PropertyChangeListener listener)
