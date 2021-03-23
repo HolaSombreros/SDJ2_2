@@ -46,7 +46,8 @@ public class ChatClient implements Model
     // TODO - modify this to make it proper.
     // Maybe add another class so we can detect different types of messages?
     if (received.contains("connected")) {
-      property.firePropertyChange("connected", null, received);
+      property.firePropertyChange("login", null, received);
+      System.out.println("Sent message to modelmanager");
     }
     else { // a message from a user
       property.firePropertyChange("message", null, received);
@@ -108,11 +109,25 @@ public class ChatClient implements Model
 
   @Override public void addListener(String propertyName, PropertyChangeListener listener)
   {
-    property.addPropertyChangeListener(propertyName,listener);
+    if (propertyName == null)
+    {
+      property.addPropertyChangeListener(listener);
+    }
+    else
+    {
+      property.addPropertyChangeListener(propertyName, listener);
+    }
   }
 
   @Override public void removeListener(String propertyName, PropertyChangeListener listener)
   {
-    property.removePropertyChangeListener(propertyName, listener);
+    if (propertyName == null)
+    {
+      property.removePropertyChangeListener(listener);
+    }
+    else
+    {
+      property.removePropertyChangeListener(propertyName, listener);
+    }
   }
 }
