@@ -21,7 +21,7 @@ public class ModelManager implements Model, PropertyChangeListener {
         try {
             chatClient = new ChatClient(this, "localhost", 1234, username);
             chatClient.addListener(null, this);
-            login(username);
+            chatClient.login(username);
 
         }
         catch (IOException e) {
@@ -31,7 +31,7 @@ public class ModelManager implements Model, PropertyChangeListener {
     
     @Override
     public void getOnlineUsersList() {
-        // TODO: Implement
+        chatClient.getOnlineUsersList();
     }
     
     @Override
@@ -41,7 +41,7 @@ public class ModelManager implements Model, PropertyChangeListener {
     
     @Override
     public void getUsername() {
-        // TODO: Implement
+        chatClient.getUsername();
     }
     
     @Override
