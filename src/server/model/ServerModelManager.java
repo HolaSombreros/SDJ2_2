@@ -26,29 +26,38 @@ public class ServerModelManager implements ServerModel
   {
     return null;
   }
-  
-  @Override
-  public void login(String username) {
-    clients.add(username);
-    property.firePropertyChange("login", null, username + " connected to the server!");
+
+  @Override public void login(String username)
+  {
+    if (clients.contains(username))
+      property.firePropertyChange("login", null, "The username already exists");
+    else
+    {
+      clients.add(username);
+      property.firePropertyChange("login", null, username + " connected to the server!");
+    }
   }
-  
+
   @Override public void addListener(String propertyName, PropertyChangeListener listener)
   {
-    if (propertyName == null) {
+    if (propertyName == null)
+    {
       property.addPropertyChangeListener(listener);
     }
-    else {
+    else
+    {
       property.addPropertyChangeListener(propertyName, listener);
     }
   }
 
   @Override public void removeListener(String propertyName, PropertyChangeListener listener)
   {
-    if (propertyName == null) {
+    if (propertyName == null)
+    {
       property.removePropertyChangeListener(listener);
     }
-    else {
+    else
+    {
       property.removePropertyChangeListener(propertyName, listener);
     }
   }
