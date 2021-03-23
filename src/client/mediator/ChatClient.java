@@ -34,7 +34,7 @@ public class ChatClient implements Model
     gson = new Gson();
     waiting = false;
     receivedMessage = null;
-    this.user = user;
+    //this.user = user;
     property = new PropertyChangeSupport(this);
     ClientReceiver clientReceiver = new ClientReceiver(this, in);
     Thread t = new Thread(clientReceiver);
@@ -45,13 +45,20 @@ public class ChatClient implements Model
   {
     // TODO - modify this to make it proper.
     // Maybe add another class so we can detect different types of messages?
-    if (received.contains("connected")) {
-      property.firePropertyChange("login", null, received);
-      System.out.println("Sent message to modelmanager");
+    Message receivedMessage = gson.fromJson(received,Message.class);
+    switch(receivedMessage.getType()){
+      case "login":
+        if(receivedMessage.getText().equals("The username already exists"))
+            throw new IllegalArgumentException(receivedMessage.getText());
+        user = receivedMessage.getUsername();
+        property.firePropertyChange("login", null, receivedMessage);
+        System.out.println("Sent message to modelmanager");
+        break;
+      case "message":
+        property.firePropertyChange("message", null, receivedMessage);
+        break;
     }
-    else { // a message from a user
-      property.firePropertyChange("message", null, received);
-    }
+
   }
 
   private synchronized void waitingForReply()
@@ -72,7 +79,10 @@ public class ChatClient implements Model
 
   @Override public void login(String username)
   {
-    out.println(username);
+    Message message = new Message("login",username,null);
+    String messageJson = gson.toJson(message);
+    out.println(messageJson);
+    waitingForReply();
   }
 
   @Override public ArrayList<String> getOnlineUsersList()
@@ -83,7 +93,9 @@ public class ChatClient implements Model
 
   @Override public void sendPublicMessage(String message)
   {
-
+    Message publicMessage = new Message("message",user,message);
+    String messageJson = gson.toJson(publicMessage);
+    out.println(messageJson);
   }
 
   @Override public String getUsername()
