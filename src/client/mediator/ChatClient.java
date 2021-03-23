@@ -80,7 +80,7 @@ public class ChatClient implements Model
     Message message = new Message("login",username,null);
     String messageJson = gson.toJson(message);
     out.println(messageJson);
-    waitingForReply();
+    //waitingForReply();
   }
 
   @Override public ArrayList<String> getOnlineUsersList()
