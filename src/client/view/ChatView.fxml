@@ -45,8 +45,8 @@
                   <Button fx:id="disconnect" mnemonicParsing="false" onAction="#disconnect" text="Disconnect" />
                </children>
             </HBox>
-            <TextField fx:id="clientMessageInput" prefHeight="25.0" prefWidth="382.0" />
-            <Button mnemonicParsing="false" onAction="#sendButton" prefHeight="25.0" prefWidth="103.0" text="Send">
+            <TextField fx:id="clientMessageInput" onAction="#onEnter" prefHeight="25.0" prefWidth="382.0" />
+            <Button mnemonicParsing="false" onAction="#sendButton"  prefHeight="25.0" prefWidth="103.0" text="Send">
                <HBox.margin>
                   <Insets right="5.0" />
                </HBox.margin>
