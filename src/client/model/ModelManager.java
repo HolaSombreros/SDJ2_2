@@ -1,6 +1,7 @@
 package client.model;
 
 import client.mediator.ChatClient;
+import server.model.Message;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -72,12 +73,15 @@ public class ModelManager implements Model, PropertyChangeListener {
     
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
+        Message message = (Message) evt.getNewValue();
         switch (evt.getPropertyName()) {
             case "login":
-                property.firePropertyChange(evt.getPropertyName(), null, evt.getNewValue());
-                break;
             case "message":
-                property.firePropertyChange(evt.getPropertyName(), null, evt.getNewValue());
+                property.firePropertyChange(evt.getPropertyName(), message.getUsername(), message.getText());
+                break;
+            case "users":
+                break;
+            case "logout":
                 break;
         }
     }
