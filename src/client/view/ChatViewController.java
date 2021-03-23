@@ -39,7 +39,7 @@ public class ChatViewController extends ViewController {
 
     }
     public void sound(){
-        String path = "../../util/notification_sound_1.mp3";
+        String path = "SDJ2_2/src/util/notification_sound_1.mp3";
         Media media = new Media(new File(path).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         mediaPlayer.play();
