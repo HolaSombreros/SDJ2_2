@@ -1,6 +1,7 @@
 package server.mediator;
 
 import com.google.gson.Gson;
+import server.model.Message;
 import server.model.ServerModel;
 
 import java.beans.PropertyChangeEvent;
@@ -26,7 +27,7 @@ public class ClientHandler implements Runnable, PropertyChangeListener
     serverModel.addListener(null, this);
     this.socket = socket;
     in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-    out = new PrintWriter(socket.getOutputStream(),true);
+    out = new PrintWriter(socket.getOutputStream(), true);
     running = true;
     gson = new Gson();
   }
@@ -37,8 +38,13 @@ public class ClientHandler implements Runnable, PropertyChangeListener
     {
       try
       {
-        String message = in.readLine();
-        serverModel.login(message);
+        String request = in.readLine();
+        Message message = gson.fromJson(request, Message.class);
+
+        switch (message.getType())
+        {
+          case "login" -> serverModel.login(message.getUsername());
+        }
       }
       catch (IOException e)
       {
@@ -49,9 +55,12 @@ public class ClientHandler implements Runnable, PropertyChangeListener
 
   @Override public void propertyChange(PropertyChangeEvent evt)
   {
-    switch (evt.getPropertyName()) {
+    switch (evt.getPropertyName())
+    {
       case "login":
-        out.println(evt.getNewValue());
+        Message message = new Message(evt.getPropertyName(), "server", (String)evt.getNewValue());
+        String reply = gson.toJson(message);
+        out.println(message);
         break;
     }
   }
