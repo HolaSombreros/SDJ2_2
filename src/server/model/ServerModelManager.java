@@ -1,7 +1,6 @@
 package server.model;
 
 import server.ServerLog;
-import server.mediator.ClientHandler;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -23,10 +22,6 @@ public class ServerModelManager implements ServerModel
     return clients;
   }
 
-  @Override public String getChatLog()
-  {
-    return null;
-  }
 
   @Override public void login(String username)
   {

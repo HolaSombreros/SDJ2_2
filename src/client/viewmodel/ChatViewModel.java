@@ -7,7 +7,6 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import server.model.Message;
-
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 

@@ -1,8 +1,5 @@
 package client.mediator;
 
-import com.google.gson.Gson;
-import server.model.Message;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 
@@ -35,7 +32,6 @@ public class ClientReceiver implements Runnable
       catch (IOException e)
       {
         disconnect();
-        //e.printStackTrace();
       }
     }
     try

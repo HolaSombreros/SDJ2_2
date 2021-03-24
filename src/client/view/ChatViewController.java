@@ -1,23 +1,17 @@
 package client.view;
 
 import client.viewmodel.ChatViewModel;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
-import javafx.scene.control.ScrollToEvent;
 import javafx.scene.control.TextField;
-import javafx.scene.input.ScrollEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-
-import java.awt.event.ActionEvent;
 import java.io.File;
 
 
 public class ChatViewController extends ViewController {
 
-    @FXML
-    private TextField clientMessageInput;
+    @FXML private TextField clientMessageInput;
     @FXML private ListView<String> chatRoom;
     @FXML private ListView<String> usersRoom;
     private ChatViewModel chatViewModel;
@@ -25,7 +19,7 @@ public class ChatViewController extends ViewController {
     public ChatViewController(){
 
     }
-    public void onEnter(javafx.event.ActionEvent event)
+    @FXML public void onEnter(javafx.event.ActionEvent event)
     {
         if(event.getSource() == clientMessageInput){
             clientMessageInput.requestFocus();
