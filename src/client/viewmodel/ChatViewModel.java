@@ -11,7 +11,7 @@ import server.model.Message;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-
+import java.util.ArrayList;
 
 public class ChatViewModel implements PropertyChangeListener
 {
@@ -52,6 +52,10 @@ public class ChatViewModel implements PropertyChangeListener
         }
         textFieldInput.set("");
     }
+    
+    public void getUsers() {
+        usersList.addAll(model.getOnlineUsersList());
+    }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt)
@@ -60,7 +64,6 @@ public class ChatViewModel implements PropertyChangeListener
             Message message = (Message)evt.getNewValue();
             switch (evt.getPropertyName()) {
                 case "login":
-                    usersList.add(message.getUsername());
                     chatList.add(message.getUsername() + " " + message.getText());
                     break;
                 case "message":

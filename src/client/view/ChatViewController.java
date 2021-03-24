@@ -38,6 +38,11 @@ public class ChatViewController extends ViewController {
     @FXML private void disconnect(){
         chatViewModel.disconnect();
     }
+    
+    @FXML private void users() {
+        chatViewModel.getUsers();
+    }
+    
     @Override
     protected void init() {
         chatViewModel = getViewModelFactory().getChatViewModel();
@@ -57,5 +62,4 @@ public class ChatViewController extends ViewController {
     public void reset() {
         chatViewModel.reset();
     }
-
 }
