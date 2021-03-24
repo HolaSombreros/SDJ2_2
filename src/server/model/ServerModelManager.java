@@ -47,7 +47,6 @@ public class ServerModelManager implements ServerModel
   @Override
   public void sendMessage(Message message) {
     property.firePropertyChange("message",null,message);
-    System.out.println("WHo sent the message: " + message.getUsername());
     ServerLog.getInstance().addLog(message);
   }
 
