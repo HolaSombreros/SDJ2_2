@@ -37,6 +37,7 @@ public class ChatViewController extends ViewController {
 
     @FXML private void disconnect(){
         chatViewModel.disconnect();
+        getViewHandler().openView(View.LOGINVIEW);
     }
     
     @FXML private void users() {
