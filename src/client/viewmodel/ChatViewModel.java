@@ -29,6 +29,7 @@ public class ChatViewModel implements PropertyChangeListener {
     public void reset() {
         textFieldInput.set(null);
         chatList.clear();
+        usersList.clear();
     }
     
     public ObservableList<String> getUsersList() {
