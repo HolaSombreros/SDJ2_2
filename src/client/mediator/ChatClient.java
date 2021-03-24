@@ -52,16 +52,15 @@ public class ChatClient implements Model
       Message receivedMessage = gson.fromJson(received,Message.class);
       switch(receivedMessage.getType()) {
         case "login":
-          user = receivedMessage.getUsername();
-          property.firePropertyChange("login", null, receivedMessage);
-          break;
         case "message":
-          property.firePropertyChange("message", null, receivedMessage);
+        case "disconnect":
+          user = receivedMessage.getUsername();
+          property.firePropertyChange(receivedMessage.getType(), null, receivedMessage);
           break;
+
         }
     }
     else{
-
         usersList = gson.fromJson(received, UsersList.class).getUsersList();
       }
 //      case "error":
@@ -122,6 +121,10 @@ public class ChatClient implements Model
 
   @Override public void disconnect()
   {
+    Message message = new Message("disconnect",user,null);
+    String messageJson = gson.toJson(message);
+    out.println(messageJson);
+
     try
     {
       in.close();
