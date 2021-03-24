@@ -10,44 +10,44 @@ import server.model.Message;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
-import java.util.ArrayList;
 
-public class ChatViewModel implements PropertyChangeListener
-{
+public class ChatViewModel implements PropertyChangeListener {
     private Model model;
     private ObservableList<String> usersList;
     private ObservableList<String> chatList;
     private StringProperty textFieldInput;
-
     
     public ChatViewModel(Model model) {
         this.model = model;
         this.chatList = FXCollections.observableArrayList();
         this.usersList = FXCollections.observableArrayList();
         this.textFieldInput = new SimpleStringProperty();
-        model.addListener(null,this);
+        model.addListener(null, this);
     }
-    public void reset(){
-            textFieldInput.set(null);
+    
+    public void reset() {
+        textFieldInput.set(null);
     }
-    public ObservableList<String> getUsersList(){
+    
+    public ObservableList<String> getUsersList() {
         return usersList;
     }
-    public ObservableList<String> getChatList(){
+    
+    public ObservableList<String> getChatList() {
         return chatList;
     }
-    public StringProperty getTextFieldInput(){
+    
+    public StringProperty getTextFieldInput() {
         return textFieldInput;
     }
-    public void disconnect(){
+    
+    public void disconnect() {
         model.disconnect();
-        System.exit(0);
-
+//        System.exit(0);
     }
-    public void sendMessage(){
-        if(!textFieldInput.get().isEmpty())
-        {
+    
+    public void sendMessage() {
+        if (!textFieldInput.get().isEmpty()) {
             model.sendPublicMessage(textFieldInput.get());
         }
         textFieldInput.set("");
@@ -56,12 +56,11 @@ public class ChatViewModel implements PropertyChangeListener
     public void getUsers() {
         usersList.addAll(model.getOnlineUsersList());
     }
-
+    
     @Override
-    public void propertyChange(PropertyChangeEvent evt)
-    {
+    public void propertyChange(PropertyChangeEvent evt) {
         Platform.runLater(() -> {
-            Message message = (Message)evt.getNewValue();
+            Message message = (Message) evt.getNewValue();
             switch (evt.getPropertyName()) {
                 case "login":
                     chatList.add(message.getUsername() + " " + message.getText());
