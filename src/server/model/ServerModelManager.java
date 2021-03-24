@@ -53,8 +53,8 @@ public class ServerModelManager implements ServerModel
   @Override public void disconnect(String username)
   {
     clients.remove(username);
-    property.firePropertyChange("disconnect",username,"disconnected from the server");
     Message message = new Message("disconnect",username,"disconnected from the server");
+    property.firePropertyChange("disconnect",null, message);
     ServerLog.getInstance().addLog(message);
   }
 
