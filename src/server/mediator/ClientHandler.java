@@ -66,10 +66,6 @@ public class ClientHandler implements Runnable, PropertyChangeListener
     {
       case "login":
       case "error":
-        message = new Message(evt.getPropertyName(), (String) evt.getOldValue(), (String) evt.getNewValue());
-        reply = gson.toJson(message);
-        out.println(reply);
-        break;
       case "message":
         message = (Message) evt.getNewValue();
         reply = gson.toJson(message);
