@@ -3,6 +3,7 @@ package server.mediator;
 import com.google.gson.Gson;
 import server.model.Message;
 import server.model.ServerModel;
+import server.model.UsersList;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -48,6 +49,11 @@ public class ClientHandler implements Runnable, PropertyChangeListener
             break;
           case "message":
             serverModel.sendMessage(message);
+            break;
+          case "usersList":
+            UsersList usersList = new UsersList(serverModel.getOnlineUsers());
+            String userListJson = gson.toJson(usersList);
+            out.println(userListJson);
             break;
         }
       }
