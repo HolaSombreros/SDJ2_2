@@ -81,9 +81,6 @@ public class ModelManager implements Model, PropertyChangeListener {
                 message = (Message) evt.getNewValue();
                 property.firePropertyChange(evt.getPropertyName(), null, message);
                 break;
-//                message = (Message) evt.getNewValue();
-//                property.firePropertyChange();
-
         }
     }
 }
