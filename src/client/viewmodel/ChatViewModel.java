@@ -67,6 +67,7 @@ public class ChatViewModel implements PropertyChangeListener {
             Message message = (Message) evt.getNewValue();
             switch (evt.getPropertyName()) {
                 case "login":
+                case "disconnect":
                     chatList.add(message.getUsername() + " " + message.getText());
                     break;
                 case "message":

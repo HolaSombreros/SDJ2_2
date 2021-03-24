@@ -20,8 +20,9 @@ public class ModelManager implements Model, PropertyChangeListener {
     
     @Override
     public void login(String username) {
+        username = username.trim();
         try {
-            if(username == null){
+            if (username.isEmpty()) {
                 throw new IllegalStateException("Enter a username");
             }
             chatClient = new ChatClient(this, "localhost", 1234);
@@ -29,13 +30,13 @@ public class ModelManager implements Model, PropertyChangeListener {
             chatClient.login(username);
         }
         catch (IOException e) {
-           e.printStackTrace();
+            e.printStackTrace();
         }
     }
     
     @Override
     public ArrayList<String> getOnlineUsersList() {
-       return chatClient.getOnlineUsersList();
+        return chatClient.getOnlineUsersList();
     }
     
     @Override
@@ -45,7 +46,7 @@ public class ModelManager implements Model, PropertyChangeListener {
     
     @Override
     public String getUsername() {
-       return chatClient.getUsername();
+        return chatClient.getUsername();
     }
     
     @Override
@@ -79,7 +80,7 @@ public class ModelManager implements Model, PropertyChangeListener {
         Message message;
         switch (evt.getPropertyName()) {
             case "login":
-            case "logout":
+            case "disconnect":
             case "message":
                 message = (Message) evt.getNewValue();
                 property.firePropertyChange(evt.getPropertyName(), null, message);

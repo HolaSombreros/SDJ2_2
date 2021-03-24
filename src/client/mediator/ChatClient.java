@@ -26,6 +26,7 @@ public class ChatClient implements Model {
     private boolean waiting;
     private PropertyChangeSupport property;
     private ArrayList<String> usersList;
+    private boolean loggedIn;
     
     public ChatClient(Model model, String host, int port) throws IOException {
         this.model = model;
@@ -48,8 +49,6 @@ public class ChatClient implements Model {
             Message receivedMessage = gson.fromJson(received, Message.class);
             switch (receivedMessage.getType()) {
                 case "login":
-                    this.user = receivedMessage.getUsername();
-                    break;
                 case "message":
                     property.firePropertyChange(receivedMessage.getType(), null, receivedMessage);
                     break;
@@ -58,7 +57,7 @@ public class ChatClient implements Model {
                     this.user = null;
                     break;
                 case "error":
-                    this.user = null;
+                    loggedIn = false;
                     break;
             }
         }
@@ -86,9 +85,14 @@ public class ChatClient implements Model {
         Message message = new Message("login", username, null);
         String messageJson = gson.toJson(message);
         out.println(messageJson);
+        loggedIn = true;
         waitingForReply();
-        if (user == null) {
+        
+        if (!loggedIn) {
             throw new IllegalStateException("That username already exists!");
+        }
+        else {
+            this.user = message.getUsername();
         }
     }
     
