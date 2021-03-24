@@ -78,6 +78,7 @@ public class ChatClient implements Model
       try
       {
         wait();
+        waiting = false;
       }
       catch (InterruptedException e)
       {

@@ -10,6 +10,7 @@ import server.model.Message;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
 
 public class ChatViewModel implements PropertyChangeListener {
     private Model model;

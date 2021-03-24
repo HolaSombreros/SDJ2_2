@@ -53,6 +53,7 @@ public class ClientHandler implements Runnable, PropertyChangeListener
           case "usersList":
             UsersList usersList = new UsersList(serverModel.getOnlineUsers());
             String userListJson = gson.toJson(usersList);
+            System.out.println("Sending user list to client");
             out.println(userListJson);
             break;
         }
