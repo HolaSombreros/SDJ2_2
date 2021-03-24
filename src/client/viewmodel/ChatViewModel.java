@@ -49,7 +49,7 @@ public class ChatViewModel implements PropertyChangeListener {
     }
     
     public void sendMessage() {
-        if (textFieldInput == null ||
+        if (textFieldInput != null ||
             !textFieldInput.get().isEmpty()) {
             model.sendPublicMessage(textFieldInput.get());
         }
