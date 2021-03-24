@@ -55,6 +55,7 @@ public class ChatViewModel implements PropertyChangeListener {
     }
     
     public void getUsers() {
+        usersList.clear();
         usersList.addAll(model.getOnlineUsersList());
     }
     
