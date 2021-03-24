@@ -21,12 +21,15 @@ public class ModelManager implements Model, PropertyChangeListener {
     @Override
     public void login(String username) {
         try {
+            if(username == null){
+                throw new IllegalStateException("Enter a username");
+            }
             chatClient = new ChatClient(this, "localhost", 1234);
             chatClient.addListener(null, this);
             chatClient.login(username);
         }
         catch (IOException e) {
-            e.printStackTrace();
+           e.printStackTrace();
         }
     }
     

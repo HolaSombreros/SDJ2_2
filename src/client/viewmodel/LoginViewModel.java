@@ -4,7 +4,8 @@ import client.model.Model;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class LoginViewModel {
+public class LoginViewModel
+{
     private Model model;
     private StringProperty username;
     private StringProperty error;
