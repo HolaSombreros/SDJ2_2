@@ -56,6 +56,8 @@ public class ClientHandler implements Runnable, PropertyChangeListener
             System.out.println("Sending user list to client");
             out.println(userListJson);
             break;
+          case "disconnect":
+            serverModel.disconnect(message.getUsername());
         }
       }
       catch (IOException e)

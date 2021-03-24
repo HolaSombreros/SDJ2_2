@@ -34,7 +34,8 @@ public class ClientReceiver implements Runnable
       }
       catch (IOException e)
       {
-        e.printStackTrace();
+        disconnect();
+        //e.printStackTrace();
       }
     }
     try
