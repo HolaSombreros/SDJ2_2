@@ -43,7 +43,7 @@
             </ListView>
             <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" prefWidth="385.0">
                <content>
-                  <VBox fx:id="chatRoom" spacing="3.0">
+                  <VBox fx:id="chatRoom" maxWidth="-Infinity" prefWidth="383.0" spacing="3.0">
                      <padding>
                         <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
                      </padding>

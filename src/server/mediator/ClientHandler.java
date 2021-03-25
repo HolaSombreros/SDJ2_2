@@ -42,7 +42,6 @@ public class ClientHandler implements Runnable, PropertyChangeListener {
             try {
                 String request = in.readLine();
                 Message message = gson.fromJson(request, Message.class);
-                
                 switch (message.getType()) {
                     case "login":
                         serverModel.login(message.getUsername());
@@ -65,8 +64,6 @@ public class ClientHandler implements Runnable, PropertyChangeListener {
             }
         }
         try {
-            in.close();
-            out.close();
             socket.close();
         }
         catch (IOException e) {

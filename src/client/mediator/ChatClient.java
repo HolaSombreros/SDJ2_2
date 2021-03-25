@@ -117,8 +117,6 @@ public class ChatClient implements Model {
         String messageJson = gson.toJson(message);
         out.println(messageJson);
         try {
-            in.close();
-            out.close();
             socket.close();
             waiting = false;
         }

@@ -10,9 +10,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import server.model.Message;
 
 import java.awt.*;
@@ -77,6 +75,9 @@ public class ChatViewModel implements PropertyChangeListener {
     
     public void addMessageBox(Message message) {
         HBox messageContainer = new HBox();
+        messageContainer.setAlignment(Pos.CENTER_LEFT);
+        messageContainer.setPrefWidth(369);
+        
         Label messageText;
         if (!message.getType().equals("message")) {
             messageText = new Label(message.getUsername() + " " + message.getText());
@@ -84,11 +85,9 @@ public class ChatViewModel implements PropertyChangeListener {
         else {
             messageText = new Label(message.getUsername() + ": " + message.getText());
         }
-        messageContainer.getChildren().add(messageText);
-        messageContainer.setAlignment(Pos.CENTER_LEFT);
-        messageContainer.setPrefWidth(366);
         messageText.setMaxWidth(messageContainer.getPrefWidth());
         messageText.setWrapText(true);
+        messageContainer.getChildren().add(messageText);
         messageList.add(messageContainer);
     }
     
