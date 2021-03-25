@@ -50,11 +50,8 @@ public class ChatClient implements Model {
             switch (receivedMessage.getType()) {
                 case "login":
                 case "message":
-                    property.firePropertyChange(receivedMessage.getType(), null, receivedMessage);
-                    break;
                 case "disconnect":
                     property.firePropertyChange(receivedMessage.getType(), null, receivedMessage);
-                    this.user = null;
                     break;
                 case "error":
                     loggedIn = false;
