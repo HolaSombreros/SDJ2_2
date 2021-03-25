@@ -1,10 +1,13 @@
 package client.view;
 
 import client.viewmodel.ChatViewModel;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
@@ -13,22 +16,23 @@ import java.io.File;
 public class ChatViewController extends ViewController {
     
     @FXML private TextField clientMessageInput;
-    @FXML private ListView<String> chatRoom;
+    @FXML private VBox chatRoom;
     @FXML private ListView<String> usersRoom;
     @FXML private Label userLabel;
+    @FXML private ScrollPane scrollPane;
     private ChatViewModel chatViewModel;
-    
-    public ChatViewController() {
-    
-    }
-    
+
     @Override
     protected void init() {
         chatViewModel = getViewModelFactory().getChatViewModel();
         clientMessageInput.textProperty().bindBidirectional(chatViewModel.getTextFieldInput());
-        chatRoom.setItems(chatViewModel.getChatList());
+        Bindings.bindContentBidirectional(chatViewModel.getMessageList(), chatRoom.getChildren());
+        chatRoom.setMaxHeight(Double.MAX_VALUE);
+        scrollPane.prefHeightProperty().bind(chatRoom.heightProperty());
         usersRoom.setItems(chatViewModel.getUsersList());
         userLabel.textProperty().bind(chatViewModel.getUsernameProperty());
+        scrollPane.vvalueProperty().bind(chatRoom.heightProperty());
+       // scrollPane.setVvalue(1.0d);
     }
     
     @Override

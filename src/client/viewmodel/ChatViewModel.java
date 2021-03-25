@@ -6,6 +6,11 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import server.model.Message;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -13,16 +18,16 @@ import java.beans.PropertyChangeListener;
 public class ChatViewModel implements PropertyChangeListener {
     private Model model;
     private ObservableList<String> usersList;
-    private ObservableList<String> chatList;
     private StringProperty username;
     private StringProperty textFieldInput;
+    private ObservableList<Node> messageList;
     
     public ChatViewModel(Model model) {
         this.model = model;
-        this.chatList = FXCollections.observableArrayList();
         this.usersList = FXCollections.observableArrayList();
         this.username = new SimpleStringProperty("Welcome, #");
         this.textFieldInput = new SimpleStringProperty();
+        this.messageList = FXCollections.observableArrayList();
         model.addListener(null, this);
         reset();
     }
@@ -30,17 +35,17 @@ public class ChatViewModel implements PropertyChangeListener {
     public void reset() {
         username.set("Welcome, #");
         textFieldInput.set("");
-        chatList.clear();
+        messageList.clear();
         usersList.clear();
+    }
+    public ObservableList<Node> getMessageList(){
+        return messageList;
     }
     
     public ObservableList<String> getUsersList() {
         return usersList;
     }
-    
-    public ObservableList<String> getChatList() {
-        return chatList;
-    }
+
     
     public StringProperty getUsernameProperty() {
         return username;
@@ -65,6 +70,19 @@ public class ChatViewModel implements PropertyChangeListener {
         usersList.clear();
         usersList.addAll(model.getOnlineUsersList());
     }
+    public HBox addMessageBox(Message message){
+        HBox hbox = new HBox();
+        Label messageLabel = new Label(message.getUsername() +  ": " + message.getText());
+        hbox.getChildren().add(messageLabel);
+        hbox.setAlignment(Pos.CENTER_LEFT);
+        hbox.setPrefWidth(0);
+        hbox.setPrefHeight(VBox.USE_COMPUTED_SIZE);
+        messageLabel.setMaxWidth(381);
+        messageLabel.prefHeight(Label.USE_COMPUTED_SIZE);
+        messageLabel.setWrapText(true);
+        messageList.add(hbox);
+        return hbox;
+    }
     
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
@@ -73,12 +91,9 @@ public class ChatViewModel implements PropertyChangeListener {
             switch (evt.getPropertyName()) {
                 case "login":
                 case "disconnect":
-                    message = (Message) evt.getNewValue();
-                    chatList.add(message.getUsername() + " " + message.getText());
-                    break;
                 case "message":
                     message = (Message) evt.getNewValue();
-                    chatList.add(message.getUsername() + ": " + message.getText());
+                    addMessageBox(message);
                     break;
                 case "username":
                     username.set(username.get().replace("#", (String) evt.getNewValue()));
