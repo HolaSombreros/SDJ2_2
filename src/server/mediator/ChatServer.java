@@ -24,6 +24,10 @@ public class ChatServer implements Runnable
     running = false;
   }
 
+  /**
+   * while the server is running creates in a try-catch block a new client socket and a new ClientHandler thread
+   * starts the thread
+   * */
   @Override public void run()
   {
     while (running)

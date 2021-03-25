@@ -33,6 +33,11 @@ public class ClientHandler implements Runnable, PropertyChangeListener
     gson = new Gson();
   }
 
+  /**
+   * while the server is running tries to read a json string from the client, converts it to an object type
+   * depending on the message type it calls different methods from the model
+   * catches IOExceptions
+   * */
   @Override public void run()
   {
     while (running)
@@ -67,6 +72,12 @@ public class ClientHandler implements Runnable, PropertyChangeListener
     }
   }
 
+
+  /**
+   * @param evt
+   * converts the message obj received from the model to a json string
+   * sends to the client json string
+   * */
   @Override public void propertyChange(PropertyChangeEvent evt)
   {
     Message message;
