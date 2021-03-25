@@ -36,8 +36,6 @@ public class LoginViewController extends ViewController {
     
     @FXML
     private void onEnter(ActionEvent e) {
-        if (e.getSource() == usernameInput) {
-            login();
-        }
+        login();
     }
 }

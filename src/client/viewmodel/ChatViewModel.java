@@ -14,18 +14,22 @@ public class ChatViewModel implements PropertyChangeListener {
     private Model model;
     private ObservableList<String> usersList;
     private ObservableList<String> chatList;
+    private StringProperty username;
     private StringProperty textFieldInput;
     
     public ChatViewModel(Model model) {
         this.model = model;
         this.chatList = FXCollections.observableArrayList();
         this.usersList = FXCollections.observableArrayList();
+        this.username = new SimpleStringProperty("Welcome, #");
         this.textFieldInput = new SimpleStringProperty();
         model.addListener(null, this);
+        reset();
     }
     
     public void reset() {
-        textFieldInput.set(null);
+        username.set("Welcome, #");
+        textFieldInput.set("");
         chatList.clear();
         usersList.clear();
     }
@@ -38,21 +42,23 @@ public class ChatViewModel implements PropertyChangeListener {
         return chatList;
     }
     
+    public StringProperty getUsernameProperty() {
+        return username;
+    }
+    
     public StringProperty getTextFieldInput() {
         return textFieldInput;
     }
     
     public void disconnect() {
         model.disconnect();
-//        System.exit(0);
     }
     
     public void sendMessage() {
-        if (textFieldInput != null ||
-            !textFieldInput.get().isEmpty()) {
+        if (textFieldInput != null && !textFieldInput.get().trim().isEmpty()) {
             model.sendPublicMessage(textFieldInput.get());
+            textFieldInput.set("");
         }
-        textFieldInput.set("");
     }
     
     public void getUsers() {
@@ -63,14 +69,19 @@ public class ChatViewModel implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         Platform.runLater(() -> {
-            Message message = (Message) evt.getNewValue();
+            Message message;
             switch (evt.getPropertyName()) {
                 case "login":
                 case "disconnect":
+                    message = (Message) evt.getNewValue();
                     chatList.add(message.getUsername() + " " + message.getText());
                     break;
                 case "message":
+                    message = (Message) evt.getNewValue();
                     chatList.add(message.getUsername() + ": " + message.getText());
+                    break;
+                case "username":
+                    username.set(username.get().replace("#", (String) evt.getNewValue()));
                     break;
             }
         });

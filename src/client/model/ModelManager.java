@@ -80,6 +80,10 @@ public class ModelManager implements Model, PropertyChangeListener {
         Message message;
         switch (evt.getPropertyName()) {
             case "login":
+                message = (Message) evt.getNewValue();
+                property.firePropertyChange(evt.getPropertyName(), null, message);
+                property.firePropertyChange("username", null, message.getUsername());
+                break;
             case "disconnect":
             case "message":
                 message = (Message) evt.getNewValue();
