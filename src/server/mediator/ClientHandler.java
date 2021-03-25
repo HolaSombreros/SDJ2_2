@@ -53,7 +53,6 @@ public class ClientHandler implements Runnable, PropertyChangeListener {
                     case "usersList":
                         UsersList usersList = new UsersList(serverModel.getOnlineUsers());
                         String userListJson = gson.toJson(usersList);
-                        System.out.println("Sending user list to client");
                         out.println(userListJson);
                         break;
                     case "disconnect":
@@ -81,15 +80,13 @@ public class ClientHandler implements Runnable, PropertyChangeListener {
      */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        Message message;
-        String reply;
         switch (evt.getPropertyName()) {
             case "login":
             case "error":
             case "message":
             case "disconnect":
-                message = (Message) evt.getNewValue();
-                reply = gson.toJson(message);
+                Message message = (Message) evt.getNewValue();
+                String reply = gson.toJson(message);
                 out.println(reply);
                 break;
         }

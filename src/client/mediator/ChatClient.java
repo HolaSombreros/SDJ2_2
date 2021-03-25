@@ -124,6 +124,11 @@ public class ChatClient implements Model {
     }
     
     @Override
+    public ChatClient getClient() {
+        return this;
+    }
+    
+    @Override
     public void addListener(String propertyName, PropertyChangeListener listener) {
         if (propertyName == null) {
             property.addPropertyChangeListener(listener);

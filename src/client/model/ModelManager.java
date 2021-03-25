@@ -57,6 +57,11 @@ public class ModelManager implements Model, PropertyChangeListener {
     }
     
     @Override
+    public ChatClient getClient() {
+        return chatClient;
+    }
+    
+    @Override
     public void addListener(String propertyName, PropertyChangeListener listener) {
         if (propertyName == null) {
             property.addPropertyChangeListener(listener);

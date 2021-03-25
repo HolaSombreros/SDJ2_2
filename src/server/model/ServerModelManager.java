@@ -28,7 +28,7 @@ public class ServerModelManager implements ServerModel {
     public void login(String username) {
         Message message;
         if (clients.contains(username)) {
-            message = new Message("error", null, "The username already exists");
+            message = new Message("error", null, null);
             property.firePropertyChange("error", null, message);
         }
         else {
