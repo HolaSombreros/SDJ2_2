@@ -1,6 +1,7 @@
 package client.mediator;
 
 import client.model.Model;
+import client.model.ModelManager;
 import com.google.gson.Gson;
 import server.model.Message;
 import server.model.UsersList;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class ChatClient implements Model {
+    private Model model;
     private Socket socket;
     private BufferedReader in;
     private PrintWriter out;
@@ -26,7 +28,8 @@ public class ChatClient implements Model {
     private PropertyChangeSupport property;
     private ArrayList<String> usersList;
     
-    public ChatClient(String host, int port) throws IOException {
+    public ChatClient(Model model, String host, int port) throws IOException {
+        this.model = model;
         socket = new Socket(host, port);
         in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         out = new PrintWriter(socket.getOutputStream(), true);
@@ -78,6 +81,7 @@ public class ChatClient implements Model {
         waitingForReply();
         
         if (receivedMessage.getUsername() == null) {
+            removeListener(null, (ModelManager) model);
             throw new IllegalStateException("That username is already taken!");
         }
         else {

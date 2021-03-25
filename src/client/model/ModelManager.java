@@ -26,9 +26,9 @@ public class ModelManager implements Model, PropertyChangeListener {
                 throw new IllegalStateException("Please choose a username");
             }
             username = username.trim();
-            chatClient = new ChatClient("localhost", ChatServer.PORT);
-            chatClient.login(username);
+            chatClient = new ChatClient(this, "localhost", ChatServer.PORT);
             chatClient.addListener(null, this);
+            chatClient.login(username);
         }
         catch (IOException e) {
             e.printStackTrace();
