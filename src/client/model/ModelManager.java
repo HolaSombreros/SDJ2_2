@@ -1,6 +1,7 @@
 package client.model;
 
 import client.mediator.ChatClient;
+import server.mediator.ChatServer;
 import server.model.Message;
 
 import java.beans.PropertyChangeEvent;
@@ -20,14 +21,14 @@ public class ModelManager implements Model, PropertyChangeListener {
     
     @Override
     public void login(String username) {
-        username = username.trim();
         try {
-            if (username.isEmpty()) {
-                throw new IllegalStateException("Enter a username");
+            if (username == null || username.trim().isEmpty()) {
+                throw new IllegalStateException("Please choose a username");
             }
-            chatClient = new ChatClient(this, "localhost", 1234);
-            chatClient.addListener(null, this);
+            username = username.trim();
+            chatClient = new ChatClient("localhost", ChatServer.PORT);
             chatClient.login(username);
+            chatClient.addListener(null, this);
         }
         catch (IOException e) {
             e.printStackTrace();

@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 
 public class LoginViewController extends ViewController {
     private LoginViewModel viewModel;
+    
     @FXML private TextField usernameInput;
     @FXML private Label errorLabel;
     

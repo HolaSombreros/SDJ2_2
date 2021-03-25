@@ -6,12 +6,16 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import server.model.Message;
+
+import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -38,14 +42,14 @@ public class ChatViewModel implements PropertyChangeListener {
         messageList.clear();
         usersList.clear();
     }
-    public ObservableList<Node> getMessageList(){
+    
+    public ObservableList<Node> getMessageList() {
         return messageList;
     }
     
     public ObservableList<String> getUsersList() {
         return usersList;
     }
-
     
     public StringProperty getUsernameProperty() {
         return username;
@@ -61,7 +65,7 @@ public class ChatViewModel implements PropertyChangeListener {
     
     public void sendMessage() {
         if (textFieldInput != null && !textFieldInput.get().trim().isEmpty()) {
-            model.sendPublicMessage(textFieldInput.get());
+            model.sendPublicMessage(textFieldInput.get().trim());
             textFieldInput.set("");
         }
     }
@@ -70,18 +74,22 @@ public class ChatViewModel implements PropertyChangeListener {
         usersList.clear();
         usersList.addAll(model.getOnlineUsersList());
     }
-    public HBox addMessageBox(Message message){
-        HBox hbox = new HBox();
-        Label messageLabel = new Label(message.getUsername() +  ": " + message.getText());
-        hbox.getChildren().add(messageLabel);
-        hbox.setAlignment(Pos.CENTER_LEFT);
-        hbox.setPrefWidth(0);
-        hbox.setPrefHeight(VBox.USE_COMPUTED_SIZE);
-        messageLabel.setMaxWidth(381);
-        messageLabel.prefHeight(Label.USE_COMPUTED_SIZE);
-        messageLabel.setWrapText(true);
-        messageList.add(hbox);
-        return hbox;
+    
+    public void addMessageBox(Message message) {
+        HBox messageContainer = new HBox();
+        Label messageText;
+        if (!message.getType().equals("message")) {
+            messageText = new Label(message.getUsername() + " " + message.getText());
+        }
+        else {
+            messageText = new Label(message.getUsername() + ": " + message.getText());
+        }
+        messageContainer.getChildren().add(messageText);
+        messageContainer.setAlignment(Pos.CENTER_LEFT);
+        messageContainer.setPrefWidth(366);
+        messageText.setMaxWidth(messageContainer.getPrefWidth());
+        messageText.setWrapText(true);
+        messageList.add(messageContainer);
     }
     
     @Override
